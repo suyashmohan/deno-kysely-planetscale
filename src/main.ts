@@ -10,7 +10,7 @@ const main = async () => {
     dialect: new PlanetScaleDialect(config),
   });
 
-  const sql = await db.selectFrom("tests").selectAll().execute();
+  const sql = await db.selectFrom("person").selectAll().execute();
   console.log(sql);
 };
 
