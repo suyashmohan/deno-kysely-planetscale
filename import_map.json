@@ -1,0 +1,8 @@
+{
+  "imports": {
+    "@/": "./src/",
+    "std/": "https://deno.land/std@0.177.1/",
+    "kysely": "https://esm.sh/kysely@0.25.0",
+    "kysely-planetscale": "https://esm.sh/kysely-planetscale@1.3.0"
+  }
+}
