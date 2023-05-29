@@ -1,5 +1,7 @@
 import { Kysely } from "kysely";
 import { PlanetScaleDialect } from "kysely-planetscale";
+import { Hono } from "hono";
+import { serve } from "std/http/server.ts";
 import "std/dotenv/load.ts";
 
 import { config } from "@/config.ts";
@@ -10,8 +12,12 @@ const main = async () => {
     dialect: new PlanetScaleDialect(config),
   });
 
-  const sql = await db.selectFrom("person").selectAll().execute();
-  console.log(sql);
+  const app = new Hono();
+  app.get("/", async (c) => {
+    const sql = await db.selectFrom("person").selectAll().execute();
+    return c.json(sql);
+  });
+  await serve(app.fetch);
 };
 
 if (import.meta.main) {
